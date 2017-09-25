@@ -5,6 +5,8 @@ import {LoginPage} from "../Pages/LoginPage";
 import {RegisterPage} from "../Pages/RegisterPage";
 import {MainPage} from "../Pages/MainPage";
 
+import {myTestData, incorrectData, invalidEmailData, caseSensData, emptyUnameData, emptyPwodData, incompleteUname} from "../Data/Data";
+
 describe('Good Films page load', function () { //Suite in Jasmine
 
     beforeEach(function () {
@@ -17,20 +19,20 @@ describe('Good Films page load', function () { //Suite in Jasmine
     var mainPage = new MainPage();
 
     //page load
-    xit('should load welcome page', function () {
+    it('should load welcome page', function () {
         expect(welcomePage.checkLogoVisibility()).toBeTruthy();
 
     });
 
     //register
-    xit('should create a new account', function () { // Test in Jasmine
+    it('should create a new account', function () { // Test in Jasmine
         welcomePage.register();
         //expect(registerPage.checkPage()).toContain("Sign Up");
-        registerPage.createAccount("Ciuciuc Ramona", "ciuciuc.ramona04@gmail.com", "123P@ssword");
+        registerPage.createAccount(myTestData.RegisterName, myTestData.RegisterEmail, myTestData.RegisterPassword);
     });
 
     //check login elements visibility
-    xit('fields should be present', function () {
+    it('fields should be present', function () {
         welcomePage.login();
         expect(loginPage.checkOtherLoginOptions()).toBeTruthy();
         expect(loginPage.checkElementsPresent()).toBeTruthy();
@@ -43,41 +45,41 @@ describe('Good Films page load', function () { //Suite in Jasmine
     //login with correct credentials
     it('should login', function () {
         welcomePage.login();
-        expect(loginPage.checkPage()).toContain("Log In");
+        expect(loginPage.checkPage()).toContain(myTestData.LoginMessage);
         expect(loginPage.forgotPasswordIsDisp()).toBeTruthy();
-        loginPage.loginUser("ciuciuc.ramona04@gmail.com", "123P@ssword");
+        loginPage.loginUser(myTestData.loginUsername, myTestData.loginPassword);
         loginPage.logoutUser();
     })
 
     //login with incorrect credentials
     it('should display auth error', function () {
         welcomePage.login();
-        expect(loginPage.checkPage()).toContain("Log In");
-        loginPage.loginUser("ciucisasuc.ramona04@gmail.com", "12ac3p@ssword");
-        expect(loginPage.getInvalidAuthError()).toContain("Please check your email and password.");
+        expect(loginPage.checkPage()).toContain(myTestData.LoginMessage);
+        loginPage.loginUser(incorrectData.loginUsername, incorrectData.loginPassword);
+        expect(loginPage.getInvalidAuthError()).toContain(incorrectData.authErrorMessage);
     });
 
     //login with invalid email address
     it('should display auth error', function () {
         welcomePage.login();
         expect(loginPage.checkPage()).toContain("Log In");
-        loginPage.loginUser("ramona@gr", "12ac3p@ssword");
-        expect(loginPage.getInvalidAuthError()).toContain("Enter a valid email address.");
+        loginPage.loginUser(invalidEmailData.loginUsername, invalidEmailData.loginPassword);
+        expect(loginPage.getInvalidAuthError()).toContain(invalidEmailData.invalidEmailMessage);
     });
 
     //test case sensitivity
     it('should display auth error', function () {
         welcomePage.login();
         expect(loginPage.checkPage()).toContain("Log In");
-        loginPage.loginUser("ciuciuc.ramona04@gmail.com", "123p@ssword");
-        expect(loginPage.getInvalidAuthError()).toContain("Please check your email and password.");
+        loginPage.loginUser(caseSensData.loginUsername, caseSensData.loginPassword);
+        expect(loginPage.getInvalidAuthError()).toContain(incorrectData.authErrorMessage);
     });
 
     //empty username field and correct password
     it('should display auth error', function () {
         welcomePage.login();
         expect(loginPage.checkPage()).toContain("Log In");
-        loginPage.loginUser("", "123P@ssword");
+        loginPage.loginUser(emptyUnameData.loginUsername, emptyUnameData.loginPassword);
         expect(loginPage.emptyEmail()).toBeTruthy();
     });
 
@@ -85,15 +87,15 @@ describe('Good Films page load', function () { //Suite in Jasmine
     it('should display auth error', function () {
         welcomePage.login();
         expect(loginPage.checkPage()).toContain("Log In");
-        loginPage.loginUser("ciuciuc.ramona04@gmail.com", "");
+        loginPage.loginUser(emptyPwodData.loginUsername, emptyPwodData.loginPassword);
         expect(loginPage.emptyPassword()).toBeTruthy();
     });
 
     //incomplete username and correct password field
     it('should display auth error', function () {
         welcomePage.login();
-        expect(loginPage.checkPage()).toContain("Log In");
-        loginPage.loginUser("ramo", "123P@ssword");
+        expect(loginPage.checkPage()).toContain(myTestData.LoginMessage);
+        loginPage.loginUser(incompleteUname.loginUsername, incompleteUname.loginPassword);
         expect(loginPage.emptyEmail()).toBeTruthy();
     });
 });

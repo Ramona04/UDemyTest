@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var protractor_1 = require("protractor");
-//import * as ram from '../res.json';
-var LoginPage = (function () {
+var LoginPage = /** @class */ (function () {
     function LoginPage() {
         this.loginMessage = protractor_1.element(protractor_1.by.css(".loginbox-v4__header"));
         this.loginWFacebookButton = protractor_1.element(protractor_1.by.css(".js-facebook-btn"));
@@ -35,11 +34,9 @@ var LoginPage = (function () {
     LoginPage.prototype.checkSignUpOptionPresent = function () {
         return this.signUpOption.isDisplayed();
     };
-    LoginPage.prototype.loginUser = function (uName, uPassword) {
-        //this.email.sendKeys((<any>ram).username);
-        this.email.sendKeys(uName);
-        //this.password.sendKeys((<any>ram).password);
-        this.password.sendKeys(uPassword);
+    LoginPage.prototype.loginUser = function (usnm, pwod) {
+        this.email.sendKeys(usnm);
+        this.password.sendKeys(pwod);
         this.loginButton.click();
     };
     LoginPage.prototype.logoutUser = function () {

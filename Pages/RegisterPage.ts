@@ -1,4 +1,5 @@
 import {by, element} from "protractor";
+import {myTestData} from "../Data/Data"
 
 export class RegisterPage {
 
@@ -14,8 +15,8 @@ export class RegisterPage {
         return this.loginMessage.getText();
     }
 
-    createAccount(fName, uEmail, uPassword) {
-        this.fullName.sendKeys(fName);
+    createAccount(uName, uEmail, uPassword) {
+        this.fullName.sendKeys(uName);
         this.email.sendKeys(uEmail);
         this.password.sendKeys(uPassword);
 

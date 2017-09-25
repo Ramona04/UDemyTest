@@ -1,5 +1,5 @@
 import {by, element, protractor, browser} from "protractor";
-//import * as ram from '../res.json';
+
 
 export class LoginPage{
 
@@ -45,11 +45,9 @@ export class LoginPage{
         return this.signUpOption.isDisplayed();
     }
 
-    loginUser(uName, uPassword){
-        //this.email.sendKeys((<any>ram).username);
-        this.email.sendKeys(uName);
-        //this.password.sendKeys((<any>ram).password);
-        this.password.sendKeys(uPassword);
+    loginUser(usnm, pwod){
+        this.email.sendKeys(usnm);
+        this.password.sendKeys(pwod);
         this.loginButton.click();
     }
 

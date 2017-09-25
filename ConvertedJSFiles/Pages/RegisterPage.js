@@ -12,8 +12,8 @@ var RegisterPage = /** @class */ (function () {
     RegisterPage.prototype.checkPage = function () {
         return this.loginMessage.getText();
     };
-    RegisterPage.prototype.createAccount = function (fName, uEmail, uPassword) {
-        this.fullName.sendKeys(fName);
+    RegisterPage.prototype.createAccount = function (uName, uEmail, uPassword) {
+        this.fullName.sendKeys(uName);
         this.email.sendKeys(uEmail);
         this.password.sendKeys(uPassword);
         this.signUpButton.click();
